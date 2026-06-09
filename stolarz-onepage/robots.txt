@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /qa/
+Disallow: /assets/images/archive/
+
+# Add the final sitemap URL after the production domain is connected.
