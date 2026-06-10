@@ -400,6 +400,7 @@ main > .section + .section {
   max-width: 100%;
   align-content: start;
   gap: 0.85rem;
+  isolation: isolate;
 }
 
 .hero-copy h1,
@@ -533,6 +534,7 @@ main > .section + .section {
 .hero-side-stack,
 .image-stack {
   display: grid;
+  min-width: 0;
   gap: 1rem;
   align-content: start;
   justify-items: end;
@@ -541,8 +543,10 @@ main > .section + .section {
 .hero-media,
 .photo-frame {
   display: grid;
+  margin: 0;
   overflow: hidden;
   width: min(100%, 460px);
+  max-width: 100%;
   border-radius: var(--radius-xl);
   background: #fff;
   box-shadow: var(--shadow-photo);
@@ -685,6 +689,33 @@ main > .section + .section {
   gap: 1rem;
 }
 
+.company-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.company-list li {
+  display: flex;
+  align-items: center;
+  min-height: 5.25rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: var(--shadow-soft);
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: clamp(1.18rem, 2.1vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
 .stats-grid,
 .project-points,
 .partner-grid,
@@ -735,6 +766,69 @@ main > .section + .section {
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
   align-items: start;
+}
+
+.project-gallery-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.carousel-toolbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+.carousel-nav,
+.carousel-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.carousel-button,
+.carousel-dot {
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.carousel-button {
+  min-height: 2.6rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.carousel-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.carousel-button:disabled {
+  opacity: 0.48;
+}
+
+.carousel-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  padding: 0;
+  border-radius: 999px;
+  opacity: 0.55;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.carousel-dot.is-active {
+  opacity: 1;
+  transform: scale(1.08);
+  background: var(--wood-dark);
 }
 
 .project-card {
@@ -802,32 +896,37 @@ main > .section + .section {
 }
 
 .page-projects .gallery-grid {
-  align-items: start;
+  align-items: stretch;
 }
 
-.page-projects .project-card-primary img,
-.page-projects .project-card-wide img {
-  aspect-ratio: 1.28;
+.page-projects .project-card {
+  height: 100%;
+  grid-template-rows: auto 1fr;
 }
 
 .page-projects .project-card-primary {
   grid-column: span 6;
 }
 
-.page-projects .project-card-primary img {
-  aspect-ratio: 1.24;
-}
-
+.page-projects .project-card-primary img,
 .page-projects .project-card-tall img {
-  aspect-ratio: 0.9;
+  height: clamp(300px, 32vw, 470px);
+  aspect-ratio: auto;
 }
 
+.page-projects .project-card-wide img,
 .page-projects .project-card-compact img {
-  aspect-ratio: 1.24;
+  height: clamp(220px, 21vw, 310px);
+  aspect-ratio: auto;
 }
 
 .page-projects .project-card-wide-half img {
-  aspect-ratio: 1.42;
+  height: clamp(230px, 23vw, 330px);
+  aspect-ratio: auto;
+}
+
+.page-projects .project-card figcaption {
+  min-height: 8.4rem;
 }
 
 .project-meta-grid {
@@ -869,6 +968,14 @@ main > .section + .section {
 .story-grid,
 .timeline-grid {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.timeline-grid {
+  align-items: stretch;
+}
+
+.timeline-grid .panel {
+  min-height: 100%;
 }
 
 .data-panel {
@@ -963,6 +1070,7 @@ main > .section + .section {
 .service-media-card {
   overflow: hidden;
   margin: 0;
+  position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
   border: 1px solid var(--line);
@@ -1042,6 +1150,10 @@ main > .section + .section {
   margin-top: 0.4rem;
 }
 
+.page-about .company-list {
+  margin-top: 0.4rem;
+}
+
 .page-services .photo-frame img {
   aspect-ratio: 1.18;
 }
@@ -1102,6 +1214,7 @@ main > .section + .section {
   border-top: 1px solid var(--line);
 }
 
+
 .footer-row {
   display: flex;
   align-items: center;
@@ -1158,6 +1271,7 @@ main > .section + .section {
   .project-points,
   .faq-grid,
   .partner-grid,
+  .company-list,
   .info-grid,
   .project-meta-grid,
   .service-media-grid {
@@ -1247,6 +1361,7 @@ main > .section + .section {
   .project-points,
   .faq-grid,
   .partner-grid,
+  .company-list,
   .info-grid,
   .project-meta-grid,
   .metrics-row,
@@ -1258,6 +1373,51 @@ main > .section + .section {
   .service-media-card img,
   .page-home .service-media-card img {
     height: 230px;
+  }
+
+  .page-projects .carousel-toolbar {
+    display: flex;
+  }
+
+  .page-projects .gallery-grid[data-carousel] {
+    display: flex;
+    gap: 0.85rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.75rem;
+    padding: 0.1rem 0.1rem 0.45rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .page-projects .gallery-grid[data-carousel]::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-projects .gallery-grid[data-carousel] .project-card {
+    flex: 0 0 min(84vw, 320px);
+    width: min(84vw, 320px);
+    scroll-snap-align: start;
+  }
+
+  .page-projects .gallery-grid[data-carousel] .project-card-primary {
+    flex-basis: min(88vw, 338px);
+    width: min(88vw, 338px);
+  }
+
+  .page-projects .gallery-grid[data-carousel] .project-card img,
+  .page-projects .gallery-grid[data-carousel] .project-card-primary img,
+  .page-projects .gallery-grid[data-carousel] .project-card-wide img,
+  .page-projects .gallery-grid[data-carousel] .project-card-compact img,
+  .page-projects .gallery-grid[data-carousel] .project-card-wide-half img {
+    height: auto;
+    aspect-ratio: 1.12;
+  }
+
+  .page-projects .gallery-grid[data-carousel] .project-card-tall img {
+    height: auto;
+    aspect-ratio: 0.86;
   }
 }
 
